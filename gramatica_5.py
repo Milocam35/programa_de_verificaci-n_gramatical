@@ -1,7 +1,5 @@
 import numpy as np
 
-#Para gramática 5
-
 class DFA:
     def __init__(self, estados, alfabeto, estado_inicial, estados_aceptacion, tabla_transiciones):
         self.estados = estados
@@ -22,7 +20,6 @@ class DFA:
                 return False
         return estado_actual in self.estados_aceptacion
 
-
 estados = ['q0', 'q1', 'q2']
 alfabeto = ['a', 'b']
 estado_inicial = 'q0'
@@ -35,8 +32,17 @@ tabla_transiciones = np.array([
 
 automata = DFA(estados, alfabeto, estado_inicial, estados_aceptacion, tabla_transiciones)
 
-cadena = input("Ingrese una cadena: ")
-if automata.procesar_cadena(cadena):
-    print("La cadena es aceptada por el autómata.")
-else:
-    print("La cadena NO es aceptada por el autómata.")
+archivos = ['programa_de_verificación_gramatical\Gramatica5_Correcta1.txt', 
+            'programa_de_verificación_gramatical\Gramatica5_Correcta2.txt', 
+            'programa_de_verificación_gramatical\Gramatica5_Incorrecta.txt']
+
+for archivo in archivos:
+    try:
+        with open(archivo, 'r') as f:
+            cadena = f.read().strip()
+            if automata.procesar_cadena(cadena):
+                print(f"La cadena {archivo} es aceptada por el autómata.")
+            else:
+                print(f"La cadena {archivo} NO es aceptada por el autómata.")
+    except FileNotFoundError:
+        print(f"El archivo {archivo} no se encontró en la ruta especificada.")
