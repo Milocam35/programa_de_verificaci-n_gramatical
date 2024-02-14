@@ -28,8 +28,8 @@ rutas_archivos = [
 
 # Procesar cada archivo y aplicar la función es_binario_capicua a su contenido
 for ruta_archivo in rutas_archivos:
-    print(f"\nVerificando el archivo: {ruta_archivo}")
     cadena = leer_binario_desde_archivo(ruta_archivo)
+    print(f"\nVerificando el archivo: {cadena}")
 
     if cadena is not None:
         if es_binario_capicua(cadena):
