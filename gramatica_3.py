@@ -1,6 +1,6 @@
 import numpy as np
-
-# Para gramática 3
+import os
+import sys
 
 class DFA:
     def __init__(self, estados, alfabeto, estado_inicial, estados_aceptacion, tabla_transiciones):
@@ -44,7 +44,13 @@ tabla_transiciones = np.array([
 
 automata = DFA(estados, alfabeto, estado_inicial, estados_aceptacion, tabla_transiciones)
 
-archivos = ['programa_de_verificación_gramatical\Gramatica3_Correcta1.txt', 'programa_de_verificación_gramatical\Gramatica3_Incorrecta1.txt']
+# Obtener la ruta del directorio actual
+directorio_actual = os.path.dirname(sys.argv[0])
+
+archivos = [os.path.join(directorio_actual, nombre_archivo) for nombre_archivo in [
+    'Gramatica3_Correcta1.txt', 
+    'Gramatica3_Incorrecta1.txt'
+]]
 
 for archivo in archivos:
     try:

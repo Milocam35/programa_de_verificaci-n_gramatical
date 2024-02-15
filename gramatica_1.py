@@ -1,3 +1,6 @@
+import os
+import sys
+
 def es_binario_capicua(cadena):
     for caracter in cadena:
         if caracter not in '01':
@@ -19,15 +22,19 @@ def leer_binario_desde_archivo(ruta_archivo):
         print(f"No se encontró el archivo: {ruta_archivo}")
         return None
 
+# Obtener la ruta del directorio actual
+directorio_actual = os.path.dirname(sys.argv[0])
+
 # Definir las rutas de los tres archivos
-rutas_archivos = [
-    "programa_de_verificación_gramatical\Gramatica1_Correcta.txt",
-    "programa_de_verificación_gramatical\Gramatica1_Incorrecta.txt",
-    "programa_de_verificación_gramatical\Gramatica1_IncorrectaCaracter.txt"
+nombres_archivos = [
+    "Gramatica1_Correcta.txt",
+    "Gramatica1_Incorrecta.txt",
+    "Gramatica1_IncorrectaCaracter.txt"
 ]
 
 # Procesar cada archivo y aplicar la función es_binario_capicua a su contenido
-for ruta_archivo in rutas_archivos:
+for nombre_archivo in nombres_archivos:
+    ruta_archivo = os.path.join(directorio_actual, nombre_archivo)
     cadena = leer_binario_desde_archivo(ruta_archivo)
     print(f"\nVerificando el archivo: {cadena}")
 
@@ -36,4 +43,3 @@ for ruta_archivo in rutas_archivos:
             print("La cadena es aceptada.")
         else:
             print("La cadena NO es aceptada.")
-

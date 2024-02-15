@@ -1,6 +1,6 @@
 import numpy as np
-
-# Para gramática 4
+import os
+import sys
 
 class DFA:
     def __init__(self, estados, alfabeto, estado_inicial, estados_aceptacion, tabla_transiciones):
@@ -34,9 +34,14 @@ tabla_transiciones = np.array([
 
 automata = DFA(estados, alfabeto, estado_inicial, estados_aceptacion, tabla_transiciones)
 
-archivos = ['programa_de_verificación_gramatical\Gramatica4_Correcta1.txt', 
-            'programa_de_verificación_gramatical\Gramatica4_Correcta2.txt',
-            'programa_de_verificación_gramatical\Gramatica4_Incorrecta.txt']
+# Obtener la ruta del directorio actual
+directorio_actual = os.path.dirname(sys.argv[0])
+
+archivos = [os.path.join(directorio_actual, nombre_archivo) for nombre_archivo in [
+    'Gramatica4_Correcta1.txt', 
+    'Gramatica4_Correcta2.txt',
+    'Gramatica4_Incorrecta.txt'
+]]
 
 for archivo in archivos:
     try:
@@ -48,4 +53,3 @@ for archivo in archivos:
                 print(f"La cadena {cadena} NO es aceptada por el autómata.")
     except FileNotFoundError:
         print(f"El archivo {archivo} no se encontró en la ruta especificada.")
-

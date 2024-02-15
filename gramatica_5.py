@@ -1,4 +1,6 @@
 import numpy as np
+import os
+import sys
 
 class DFA:
     def __init__(self, estados, alfabeto, estado_inicial, estados_aceptacion, tabla_transiciones):
@@ -32,17 +34,22 @@ tabla_transiciones = np.array([
 
 automata = DFA(estados, alfabeto, estado_inicial, estados_aceptacion, tabla_transiciones)
 
-archivos = ['programa_de_verificación_gramatical\Gramatica5_Correcta1.txt', 
-            'programa_de_verificación_gramatical\Gramatica5_Correcta2.txt', 
-            'programa_de_verificación_gramatical\Gramatica5_Incorrecta.txt']
+# Obtener la ruta del directorio actual
+directorio_actual = os.path.dirname(sys.argv[0])
+
+archivos = [os.path.join(directorio_actual, nombre_archivo) for nombre_archivo in [
+    'Gramatica5_Correcta1.txt', 
+    'Gramatica5_Correcta2.txt', 
+    'Gramatica5_Incorrecta.txt'
+]]
 
 for archivo in archivos:
     try:
         with open(archivo, 'r') as f:
             cadena = f.read().strip()
             if automata.procesar_cadena(cadena):
-                print(f"La cadena {archivo} es aceptada por el autómata.")
+                print(f"La cadena {cadena} es aceptada por el autómata.")
             else:
-                print(f"La cadena {archivo} NO es aceptada por el autómata.")
+                print(f"La cadena {cadena} NO es aceptada por el autómata.")
     except FileNotFoundError:
         print(f"El archivo {archivo} no se encontró en la ruta especificada.")
